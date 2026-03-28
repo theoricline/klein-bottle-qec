@@ -1,0 +1,6 @@
+flask>=3.0
+numpy>=1.26
+gunicorn>=21.0
+qiskit>=1.0
+qiskit-ibm-runtime>=0.20
+matplotlib>=3.8
