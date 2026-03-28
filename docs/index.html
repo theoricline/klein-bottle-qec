@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quantum Seam — Leonardo Roma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Georgia', serif; line-height: 1.8; color: #1a1a1a; }
+        h1, h2, h3 { font-family: 'Helvetica Neue', sans-serif; font-weight: 700; }
+        p { margin-bottom: 1.2rem; }
+        .image-caption { font-style: italic; color: #666; font-size: 0.88rem; text-align: center; margin-top: 0.75rem; }
+        .figure-box { margin: 2.5rem 0; border: 1px solid #e5e7eb; padding: 1.25rem; border-radius: 10px; background: #fafafa; }
+        img { max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 0 auto; }
+        code { background: #f3f4f6; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+        .doi-link { color: #4f46e5; text-decoration: none; }
+        .doi-link:hover { text-decoration: underline; }
+        blockquote { border-left: 3px solid #4f46e5; padding-left: 1.25rem; margin: 1.5rem 0; color: #444; font-style: italic; }
+        .stat { font-family: monospace; background: #f3f4f6; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.95em; }
+    </style>
+</head>
+<body class="bg-white px-6 py-12 md:px-16 lg:px-32 max-w-5xl mx-auto">
+
+    <header class="mb-12 border-b pb-10">
+        <div class="text-sm text-indigo-600 font-sans font-semibold uppercase tracking-widest mb-4">Essay · March 2026</div>
+        <h1 class="text-4xl md:text-5xl mb-5 leading-tight">The Quantum Seam</h1>
+        <h2 class="text-xl md:text-2xl text-gray-500 font-normal italic mb-8">What a 3D Artist Knows About Quantum Error Correction</h2>
+        <div class="flex flex-wrap gap-4 text-sm text-gray-500 font-sans">
+            <span><strong class="text-gray-700">Author:</strong> Leonardo Roma</span>
+            <span>·</span>
+            <span><a href="https://kleincode.pythonanywhere.com" class="doi-link">kleincode.pythonanywhere.com</a></span>
+            <span>·</span>
+            <span><a href="https://github.com/theoricline/klein-bottle-qec" class="doi-link">GitHub</a></span>
+        </div>
+    </header>
+
+    <!-- Section 1 -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">1. The Mesh</h3>
+
+        <p>You have a flat rectangular mesh. Four vertices across, two rows high. You want to wrap it into a surface.</p>
+
+        <p>Before you touch a single vertex, you face a choice that has nothing to do with shape, scale, or subdivision. You have to decide how to <strong>stitch the edges</strong>.</p>
+
+        <p>In Blender, you call this <strong>UV unwrapping</strong>. You mark seams — the cuts that tell the renderer how to flatten the surface into texture space — and then you choose how the edges of that flat rectangle connect when the mesh wraps back into 3D. Do the left and right edges join with the same orientation? Does the top wrap to the bottom straight, or with a flip?</p>
+
+        <p>These choices feel like texture settings. They are not. They determine what surface you are building.</p>
+
+        <blockquote>A rectangle with its edges stitched straight in both directions is a torus — a donut. A rectangle with one pair of edges stitched in opposite orientations is a Klein bottle — a surface that has no inside or outside, no consistent notion of which way is "up."</blockquote>
+
+        <p>The mesh topology is not a consequence of the geometry. It is a consequence of the seam.</p>
+
+        <div class="figure-box">
+            <img src="essay_fig1_stitchings.png" alt="Edge identification rules — cylinder, torus, Klein bottle, real projective plane">
+            <p class="image-caption">Figure 1 — The same rectangular mesh, four different seam rules. Arrows show edge identification and orientation. One flip changes the topology completely.</p>
+        </div>
+
+        <p>This is the insight that quantum error correction has been sitting on for thirty years without noticing: <strong>the quantum code you get from a lattice of qubits depends entirely on which seam rule you apply when you stitch the lattice.</strong> And until very recently, every quantum error-correcting code ever run on real hardware used the same seam.</p>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">2. The Four Stitchings</h3>
+
+        <p>A flat rectangle has four edges: top, bottom, left, right. You can identify pairs of opposite edges — stitch top to bottom, stitch left to right — with either matching or opposing orientation. The combinations give you four distinct surfaces.</p>
+
+        <p><strong>No vertical stitching:</strong> a cylinder. Open top and bottom. Orientable, simple.</p>
+
+        <p><strong>Both edges straight:</strong> a torus. Top joins bottom, left joins right, all arrows pointing the same way. This is the donut. It is orientable — you can define a consistent "up" everywhere on the surface. The standard quantum toric code lives here.</p>
+
+        <p><strong>One pair flipped:</strong> a Klein bottle. Top joins bottom straight, but left joins right with a 180° flip — what a 3D artist would call a <em>mirror</em> seam instead of a <em>repeat</em> seam. The surface becomes non-orientable. A traveler walking across it returns to their starting point with left and right hands swapped. There is no inside or outside.</p>
+
+        <p><strong>Both pairs flipped:</strong> the real projective plane. Non-orientable, and stranger still — it cannot be embedded in three-dimensional space without self-intersection.</p>
+
+        <p>The Klein bottle sits exactly <strong>one seam-flip</strong> away from the torus. Everything else — the shape of the mesh, the number of vertices, the edges, the connectivity — stays the same. Only the seam rule changes.</p>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">3. The Quantum Lattice</h3>
+
+        <p>IBM Fez is a 156-qubit superconducting processor. Its physical connectivity forms a graph — the heavy-hex lattice — that engineers design to minimise crosstalk between qubits. From a topology standpoint, this lattice is a graph embedded in a surface. The specific surface depends on the boundary conditions.</p>
+
+        <p>The surface code, which Google, IBM, and Quantinuum use for their logical qubit experiments, wraps the heavy-hex lattice as a torus. Left connects to right, top connects to bottom, same orientation on both. This is the Blender "Repeat" setting on both axes.</p>
+
+        <p><strong>In our experiment, we changed one seam.</strong></p>
+
+        <p>The left-to-right connection stays the same — straight, periodic. But the top-to-bottom connection gets a flip: instead of connecting vertex <code>(x, 0)</code> to vertex <code>(x, Ly)</code> directly opposite, it connects to vertex <code>(Lx−1−x, Ly)</code> — the vertex reflected across the centre of the lattice. This is exactly the "Mirror" seam in UV space. We call it the <strong>antipodal identification</strong>.</p>
+
+        <div class="figure-box">
+            <img src="essay_fig2_lattice.png" alt="Toric code vs Klein bottle code — same lattice, one seam changed">
+            <p class="image-caption">Figure 2 — Same lattice. Same qubits. One seam changed. Left: toric code with standard periodic edge (dashed blue). Right: Klein bottle code with the antipodal edge — one connection reflected across the lattice centre (red). The mesh is identical. The seam is different. The physics changes completely.</p>
+        </div>
+
+        <p>The antipodal edge connects two vertices that would never be adjacent in the toric code. In a circuit, it means one CX gate in the syndrome measurement jumps across the lattice — a non-local operation. In Blender terms, it is the seam line. In quantum terms, it is the edge that encodes the entire topological twist.</p>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">4. What the Flip Does</h3>
+
+        <p>In a 3D mesh, the seam flip creates a surface you cannot orient. The Möbius strip is the one-dimensional version — walk along it and you return upside down. The Klein bottle is the two-dimensional version. It is the surface that has no consistent "up."</p>
+
+        <p>In the quantum code, the seam flip creates a <strong>logical algebra you cannot orient</strong>. There are two logical operators — corresponding to the two non-contractible cycles on the surface. On a torus, these operators commute: applying one does not affect what the other measures. They are independent.</p>
+
+        <p>On a Klein bottle, they anticommute. Applying the "right" logical operator — the b-cycle, which crosses the flipped seam — changes the state of the "left" logical qubit. This is the algebraic signature of non-orientability, expressed not as a geometric statement but as a quantum commutation relation.</p>
+
+        <div class="figure-box">
+            <img src="essay_fig3_uv.png" alt="UV seam analogy — Repeat vs Mirror">
+            <p class="image-caption">Figure 3 — The UV seam analogy. Left: toric code — Repeat seam, both edges same orientation. Right: Klein bottle code — Mirror seam, one edge flipped. In Blender, this is the difference between "Repeat" and "Mirror" on the U axis.</p>
+        </div>
+
+        <p>We measured this directly on IBM Fez using dynamic circuits — mid-circuit reset, two syndrome measurement rounds, the logical gate applied between them. The Klein code and the toric code produced <strong>different syndrome patterns from the identical gate</strong>. The patterns differ by exactly the bit positions that theory predicts from the seam flip.</p>
+
+        <blockquote>The seam flip is not a mathematical abstraction. It is a physical operation that changes what the hardware computes — confirmed at <span class="stat">Z = 90σ</span> for the Klein algebra and <span class="stat">Z = 272σ</span> for the toric comparison.</blockquote>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">5. Six UV Islands</h3>
+
+        <p>Once you understand that the quantum code is the seam rule applied to a mesh, parallel codes become obvious. They are <strong>UV islands</strong>.</p>
+
+        <p>In a texture atlas, you pack multiple UV islands into a single texture map. Each island is an independent unwrapping of the same mesh, with its own seam rules, occupying non-overlapping regions of texture space. The renderer treats them independently. They do not interfere.</p>
+
+        <p>We did exactly this on IBM Fez. Six Klein bottle UV islands, each occupying 24 qubits (16 data, 8 syndrome), tiling the 156-qubit chip. Each island applies the same seam rule — the antipodal flip — to its own independent block of qubits. The islands do not interact.</p>
+
+        <div class="figure-box">
+            <img src="essay_fig4_atlas.png" alt="Six UV islands — texture atlas on IBM Fez">
+            <p class="image-caption">Figure 4 — Six Klein bottle UV islands packing the IBM Fez chip. Each island is an independent Klein bottle code with the same antipodal seam rule. Together they encode 12 logical qubits — 3× the surface code capacity on the same hardware. All six confirmed at <span class="stat">Z = 620–641σ</span> with <span class="stat">CV = 0.01</span>.</p>
+        </div>
+
+        <p>The result: <strong>12 logical qubits</strong>. 144 of 156 physical qubits used (92% of the chip). All six islands producing signals in the range <span class="stat">Z = 620–641σ</span>, with a coefficient of variation of <span class="stat">CV = 0.01</span> — essentially identical performance across all six regions of the chip.</p>
+
+        <p>A texture artist knows this intuitively. A UV island placed at the top-left of the texture atlas and one placed at the bottom-right, both with the same seam rule, produce the same surface. The atlas coordinates are irrelevant. The seam is what matters.</p>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="mb-12">
+        <h3 class="text-2xl mb-5 text-gray-900">The Seam Is the Physics</h3>
+
+        <p>The standard story of quantum error correction is told in the language of stabilizer groups, Pauli operators, syndrome extraction, and decoder graphs. This language is correct and necessary. But it obscures something that is visually obvious:</p>
+
+        <blockquote>The quantum code is the surface. The surface is the seam rule. The seam rule is one line in the circuit.</blockquote>
+
+        <p>Changing from the toric code to the Klein bottle code required one modification: replacing a periodic boundary condition with an antipodal one. In circuit terms, one CX gate routed to a reflected vertex instead of the periodic one. In UV terms, one edge changed from "Repeat" to "Mirror." In physics terms, the topology of the space in which quantum information is stored changed completely.</p>
+
+        <p>The heavy-hex lattice on IBM Fez is a blank canvas. It does not have a topology until you stitch it. Every choice of seam rule gives you a different quantum code with different properties, different logical operators, different error correction capacity. The surface code is one choice. The Klein bottle code is another. There are others still unexplored.</p>
+
+        <p>Quantum error correction has been asking: how do we protect quantum information from noise? The answer has always been: wrap it in the right topology. The topology lives in the seam.</p>
+
+        <blockquote>The next time you mark a seam in Blender and choose between Repeat and Mirror, you are making a topological decision. So are we — and the hardware confirms it, at <span class="stat">627σ</span>.</blockquote>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-8 border-t text-sm text-gray-500 font-sans">
+        <p class="mb-3 font-semibold text-gray-700">Experimental results documented in:</p>
+        <ul class="space-y-1 mb-6">
+            <li>Paper 1 — Klein bottle code on hardware: <a href="https://doi.org/10.5281/zenodo.19284050" class="doi-link">doi:10.5281/zenodo.19284050</a></li>
+            <li>Paper 2 — δ-family and topological encoding: <a href="https://doi.org/10.5281/zenodo.19286677" class="doi-link">doi:10.5281/zenodo.19286677</a></li>
+            <li>Paper 3 — Non-orientable logical algebra: <a href="https://doi.org/10.5281/zenodo.19287977" class="doi-link">doi:10.5281/zenodo.19287977</a></li>
+            <li>Paper 4 — 12 logical qubits: <em>Zenodo, March 2026</em></li>
+        </ul>
+        <p>
+            <a href="https://kleincode.pythonanywhere.com" class="doi-link">Live demo</a> ·
+            <a href="https://github.com/theoricline/klein-bottle-qec" class="doi-link">GitHub</a> ·
+            Leonardo Roma · Milan, Italy · 2026
+        </p>
+    </footer>
+
+</body>
+</html>
