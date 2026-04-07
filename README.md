@@ -43,7 +43,7 @@ without requiring IBM Quantum access.
 | 3 | Logical Operator Holonomy and Non-Orientable Algebra | [10.5281/zenodo.19287977](https://doi.org/10.5281/zenodo.19287977) | Z₂ holonomy Z=45–312σ |
 | 4 | Twelve Logical Qubits via Six Simultaneous Codes | [10.5281/zenodo.19333513](https://doi.org/10.5281/zenodo.19333513) | 12 logical qubits CV=0.01 |
 | 5 | MWPM Decoder with Antipodal Shortcut | [10.5281/zenodo.19451825](https://doi.org/10.5281/zenodo.19451825) | 6/6 hardware Z=688–730σ |
-| 6 | Comprehensive paper (Klein + RP²) | Zenodo (forthcoming) | RP² existence + logical qubit |
+| 6 | Comprehensive paper (Klein + RP²) |  ([10.5281/zenodo.19454514](https://doi.org/10.5281/zenodo.19454514) | RP² existence + logical qubit |
 
 ---
 
