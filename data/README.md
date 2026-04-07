@@ -241,7 +241,7 @@ on IBM Fez (Heron r2 native gate set: CZ, RZ, SX, X).
 | 3 | Logical Operator Holonomy and Non-Orientable Algebra | [10.5281/zenodo.19287977](https://doi.org/10.5281/zenodo.19287977) |
 | 4 | Twelve Logical Qubits via Six Simultaneous Non-Orientable Codes | [10.5281/zenodo.19333513](https://doi.org/10.5281/zenodo.19333513) |
 | 5 | MWPM Decoder with Antipodal Shortcut and Hardware Validation | [10.5281/zenodo.19451825](https://doi.org/10.5281/zenodo.19451825) |
-| 6 | Comprehensive paper (Klein bottle + RP² stabilizer codes) | Zenodo (forthcoming) |
+| 6 | Comprehensive paper (Klein bottle + RP² stabilizer codes) | [10.5281/zenodo.19454514](https://doi.org/10.5281/zenodo.19454514) |
 
 ---
 
