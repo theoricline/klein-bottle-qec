@@ -206,8 +206,6 @@ scripts, analyse your own counts, view benchmarks.
 ├── klein_bottle_code.py         Core module — KleinBottleCode, ToricCode
 ├── verify_195sigma.py           Reproduce primary result from Paper 1
 ├── logical_error_scaling.py     MWPM logical error rate simulation
-├── verification_experiments.py  Definitive verification run (all 6 JSONs)
-├── extract_jsons_colab.py       Extract JSONs from completed jobs in Colab
 ├── rp2_existence.py             RP² existence circuits
 ├── rp2_logical_qubit.py         RP² logical qubit circuits
 ├── kbcode/
