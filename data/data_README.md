@@ -100,10 +100,10 @@ while Klein and toric both predict {0, 3} (local, adjacent).
 
 | Circuit | Expected syndrome | Dominant pattern | f | Z |
 |---------|------------------|-----------------|---|---|
-| Vacuum | {} | `0000000000000000` | 0.0513 | 571σ |
-| Flip v(3,3) | {0, 15} | `1000000000000001` | 0.0388 | 390σ |
-| Flip h(3,0) ← **kill test** | **{3, 12}** | `0001000000001000` | 0.0361 | 362σ |
-| Flip both | {0, 3, 12, 15} | `1001000000001001` | 0.0264 | 266σ |
+| Vacuum | {} | `0000000000000000` | 0.0493 | 571σ |
+| Flip v(3,3) | {0, 15} | `1000000000000001` | 0.0337 | 390σ |
+| Flip h(3,0) ← **kill test** | **{3, 12}** | `0001000000001000` | 0.0313 | 362σ |
+| Flip both | {0, 3, 12, 15} | `1001000000001001` | 0.0229 | 266σ |
 
 The kill test fires {3, 12} at 362σ with zero noise bits in the dominant —
 the first experimental confirmation of a doubly-identified non-orientable
