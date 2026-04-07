@@ -1,0 +1,59 @@
+{
+  "experiment": "rp2_logical_qubit",
+  "claim": "RP\u00b2 logical qubit verified: Z_L contrast confirms GSD=2",
+  "papers": [
+    "comprehensive paper (this work)"
+  ],
+  "hardware": "ibm_fez",
+  "date": "2026-04-07",
+  "seed": 77,
+  "job_id": "d7af5cak86tc73a1hpvg",
+  "geometry": {
+    "Lx": 4,
+    "Ly": 4
+  },
+  "ZL_edges": [
+    3,
+    28
+  ],
+  "XL_edges": [
+    2,
+    3,
+    12,
+    29
+  ],
+  "ZL_operator": "Z_{h(3,0)} \u00b7 Z_{v(0,3)} \u2014 weight 2",
+  "circuits": [
+    {
+      "label": "0L",
+      "shots": 2048,
+      "xl_flip": false,
+      "ZL_expectation": 0.5684,
+      "ZL_counts": {
+        "00": 1528,
+        "10": 162,
+        "01": 280,
+        "11": 78
+      },
+      "syndrome_dominant": "0000000000001000",
+      "syndrome_f": 0.02002,
+      "syndrome_empty": false
+    },
+    {
+      "label": "1L",
+      "shots": 2048,
+      "xl_flip": true,
+      "ZL_expectation": -0.3164,
+      "ZL_counts": {
+        "01": 1226,
+        "00": 557,
+        "11": 143,
+        "10": 122
+      },
+      "syndrome_dominant": "0000000000001000",
+      "syndrome_f": 0.02246,
+      "syndrome_empty": false
+    }
+  ],
+  "ZL_contrast": 0.8848
+}
